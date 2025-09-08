@@ -23,10 +23,8 @@ def login():
 @app.route('/')
 def homepage():
     if current_user.is_authenticated:
-        # Se o usuário estiver logado, redireciona para a lista de livros
         return redirect(url_for('livro_lista'))
     else:
-        # Se não estiver logado, mostra a página inicial
         return render_template('home.html')
 
 
