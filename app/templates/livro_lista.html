@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Lista de livros</h3>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Editora</th>
+            <th>Ano</th>
+            <th>Gênero</th>
+            <th>Exemplares Disponíveis</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for livro in livros.dados %}
+        <tr>
+            <td>{{ livro.id }}</td>
+            <td>{{ livro.titulo }}</td>
+            <td>{{ livro.autor }}</td>
+            <td>{{ livro.editora }}</td>
+            <td>{{ livro.anoPublicacao }}</td>
+            <td>{{ livro.genero }}</td>
+            <td>{{ livro.quantidade_disponivel }}</td>
+            <td>{{ livro.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

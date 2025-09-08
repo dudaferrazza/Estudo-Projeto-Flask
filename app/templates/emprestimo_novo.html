@@ -1,0 +1,21 @@
+    {% extends 'base.html' %}
+    {% block content %}
+    <h3>Novo empréstimo</h3>
+    <form method="POST">
+        {{ form.csrf_token }}
+        
+        <label>{{ form.user_id.label }}</label>
+        {{ form.user_id(class="form-select mb-2") }}
+
+        <label>{{ form.livro_id.label }}</label>
+        {{ form.livro_id(class="form-select mb-2") }}
+
+        <label>{{ form.data_emprestimo.label }}</label>
+        {{ form.data_emprestimo(class="form-control mb-3") }}
+        
+        <label>{{ form.data_devolucao.label }}</label>
+        {{ form.data_devolucao(class="form-control mb-3") }}
+
+        {{ form.btnSubmit(class="btn btn-primary") }}
+    </form>
+    {% endblock %}

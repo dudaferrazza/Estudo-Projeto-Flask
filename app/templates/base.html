@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .pinky{background-color:rgb(66, 115, 248); border-color:rgb(66, 115, 248);}
+        .rosa{background-color: rgb(66, 115, 248); border-color:rgb(66, 115, 248);}
+        .folha{background-color:rgb(66, 115, 248); border-color:rgb(66, 115, 248);}
+        .caule{background-color:rgb(66, 115, 248); border-color:rgb(66, 115, 248);}
+    </style>
+</head>
+<body>
+    {% include 'nave.html' %}
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

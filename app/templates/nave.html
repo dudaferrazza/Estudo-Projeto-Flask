@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('homepage') }}">Biblioteca</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a href="{{ url_for('livro_lista') }}" class="btn btn-dark pinky m-1">Livros</a></li>
+                <li class="nav-item"><a href="{{ url_for('livro_novo') }}" class="btn btn-dark rosa m-1">Cadastrar livro</a></li>
+                <li class="nav-item"><a href="{{ url_for('emprestimo_lista') }}" class="btn btn-dark folha m-1">Empréstimos</a></li>
+                <li class="nav-item"><a href="{{ url_for('emprestimo_novo') }}" class="btn btn-dark caule m-1">Novo empréstimo</a></li>
+            </ul>
+            <span class="navbar-text text-white">
+                {% if current_user.is_authenticated %}
+                    {{ current_user.nome }}
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger btn-sm ms-2">Sair</a>
+                {% else %}
+                    <a href="{{ url_for('cadastro') }}" class="btn btn-primary btn-sm">Cadastrar</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</nav>
