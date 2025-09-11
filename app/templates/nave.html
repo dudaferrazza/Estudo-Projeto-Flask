@@ -1,19 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('homepage') }}">Biblioteca</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a href="{{ url_for('livro_lista') }}" class="btn btn-dark pinky m-1">Livros</a></li>
-                <li class="nav-item"><a href="{{ url_for('livro_novo') }}" class="btn btn-dark rosa m-1">Cadastrar livro</a></li>
-                <li class="nav-item"><a href="{{ url_for('emprestimo_lista') }}" class="btn btn-dark folha m-1">Empréstimos</a></li>
-                <li class="nav-item"><a href="{{ url_for('emprestimo_novo') }}" class="btn btn-dark caule m-1">Novo empréstimo</a></li>
+        <a class="navbar-brand" href="{{ url_for('homepage') }}"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="{{ url_for('livro_lista') }}" class="btn btn-outline-light m-2">Livros</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('livro_novo') }}" class="btn btn-outline-light m-2">Cadastrar livro</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('emprestimo_lista') }}" class="btn btn-outline-light m-2">Empréstimos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('emprestimo_novo') }}" class="btn btn-outline-light m-2">Fazer novo empréstimo</a>
+                </li>
             </ul>
-            <span class="navbar-text text-white">
+            <span class="navbar-text">
                 {% if current_user.is_authenticated %}
-                    {{ current_user.nome }}
-                    <a href="{{ url_for('logout') }}" class="btn btn-danger btn-sm ms-2">Sair</a>
+                    <span class="text-white">{{ current_user.nome }}</span>
+                    <a href="{{ url_for('logout') }}" class="btn btn-outline-light m-2">Sair</a>
                 {% else %}
-                    <a href="{{ url_for('cadastro') }}" class="btn btn-primary btn-sm">Cadastrar</a>
+                    <a href="{{ url_for('cadastro') }}" class="btn btn-outline-light m-2">Cadastrar</a>
                 {% endif %}
             </span>
         </div>

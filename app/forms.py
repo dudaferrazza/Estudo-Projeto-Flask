@@ -57,16 +57,17 @@ class LivroForm(FlaskForm):
         status1 = "Indisponível" if qtd <= 0 else "Disponível"
 
         livro = Livro(
-            titulo = self.titulo.data,
-            autor = self.autor.data,
-            editora = self.editora.data,
-            anoPublicacao = self.anoPublicacao.data,
-            genero = self.genero.data,
-            quantidade_disponivel = qtd,
-            status = status1
+            titulo=self.titulo.data,
+            autor=self.autor.data,
+            editora=self.editora.data,
+            anoPublicacao=self.anoPublicacao.data,
+            genero=self.genero.data,
+            quantidade_disponivel=qtd,
+            status=status1
         )
         db.session.add(livro)
         db.session.commit()
+
 
 class EmprestimoForm(FlaskForm):
     data_emprestimo = DateField('Data do Empréstimo', format='%Y-%m-%d', validators=[DataRequired()])
@@ -79,15 +80,34 @@ class EmprestimoForm(FlaskForm):
         super().__init__(*args, **kwargs)
         self.user_id.choices = [(u.id, u.nome) for u in User.query.all()]
         self.livro_id.choices = [(l.id, l.titulo) for l in Livro.query.all()]
-    
+
+    def validate(self, *args, **kwargs):
+        if not super().validate(*args, **kwargs):
+            return False
+
+        if self.data_devolucao.data < self.data_emprestimo.data:
+            self.data_devolucao.errors.append("A data de devolução não pode ser menor que a data de empréstimo.")
+            return False
+
+        livro = Livro.query.get(self.livro_id.data)
+        if livro.quantidade_disponivel <= 0:
+            self.livro_id.errors.append("O livro selecionado está indisponível para empréstimo.")
+            return False
+
+        return True
+
     def save(self):
+        livro = Livro.query.get(self.livro_id.data)
+        livro.quantidade_disponivel -= 1
+        if livro.quantidade_disponivel <= 0:
+            livro.status = "Indisponível"
 
         emprestimo = Emprestimo(
-            data_emprestimo = self.data_emprestimo.data,
-            data_devolucao = self.data_devolucao.data,
-            user_id = self.user_id.data,
-            livro_id = self.livro_id.data
+            data_emprestimo=self.data_emprestimo.data,
+            data_devolucao=self.data_devolucao.data,
+            user_id=self.user_id.data,
+            livro_id=self.livro_id.data
         )
 
         db.session.add(emprestimo)
-        db.session.commit()
+        db.session.commit() 
